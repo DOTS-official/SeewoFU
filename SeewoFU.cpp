@@ -1,0 +1,27 @@
+#include <iostream>
+#include <windows.h>
+#include <conio.h> 
+#include <fstream>
+using namespace std;
+int main()
+{
+	HWND cmd =FindWindow("ConsoleWindowClass",NULL);
+	SetWindowPos(cmd,HWND_BOTTOM,0,0,0,0,SWP_HIDEWINDOW | SWP_NOOWNERZORDER);
+	ifstream infile("EUC.bin",ios::in);//EUC认证 
+	if(!infile) {MessageBoxA(0,"非认证设备,限制使用本软件。","DOTS_CopyRight 2023",MB_TOPMOST|MB_ICONERROR);}//未发现文件
+	string s;//创建存储数据用变量
+	while(infile>>s)//输入文件流
+	if(s=="1"){
+		while(1)
+		{
+			HWND sw=FindWindow(NULL,"希沃管家");
+			HWND swf =GetForegroundWindow(); 
+				if (sw!=0||sw==swf){
+				SetWindowPos(sw,HWND_BOTTOM,0,0,0,0,SWP_HIDEWINDOW | SWP_NOOWNERZORDER);
+				}
+			Sleep(5000);
+		}
+	}
+	else{exit;} 
+	return 0;
+}
